@@ -1,4 +1,4 @@
-# Firecart - Free Shopify Alternative
+# Firefly - Free Shopify Alternative
 
 ## Overview
 This repository provides a fully implemented backend for an e-commerce platform built on Firebase, designed as a flexible alternative to Shopify. It allows developers to focus on building the actual store frontend without worrying about backend complexities such as authentication, product management, orders, and payments.
