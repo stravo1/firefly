@@ -7,7 +7,7 @@ This repository provides a fully implemented backend for an e-commerce platform,
 - **Product Management**: Add, update, and delete products with categories, variants, and inventory tracking.
 - **User Authentication**: Secure authentication using Firebase Authentication.
 - **Order Management**: Full order lifecycle support, from cart to checkout to order fulfillment.
-- **Payment Integration**: Pre-configured support for Stripe and PayPal (easily extendable for other gateways).
+- **Payment Integration**: Pre-configured support for PayU and Razorpay.
 
 ## Tech Stack
 - **Frontend**: NextJS, TailwindCSS, shadcn/ui, React Icons
