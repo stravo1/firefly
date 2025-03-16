@@ -1,4 +1,12 @@
 'use client';
+
+import { GalleryVerticalEnd } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -9,7 +17,6 @@ import {
     onAuthStateChanged,
 } from 'firebase/auth';
 
-import { Button } from '@/components/ui/button';
 import {
     Form,
     FormControl,
@@ -19,10 +26,8 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 
 import { LuLoader, LuLogIn, LuSparkles } from 'react-icons/lu';
-import { RiAdminLine } from 'react-icons/ri';
 import { firebaseAppAsAdmin } from '@/config';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -34,9 +39,9 @@ const formSchema = z.object({
 });
 
 const auth = getAuth(firebaseAppAsAdmin);
-connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+// connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 
-export default function Login() {
+function LoginForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [loadingSignIn, setLoadingSignIn] = useState(false);
@@ -88,18 +93,15 @@ export default function Login() {
         return unsubscribe;
     }, [auth, router]);
 
-    if (loading) {
-        return (
-            <div className="fixed inset-0 flex gap-2 justify-center items-center w-screen h-screen font-medium bg-white z-50">
-                <LuLoader className="w-6 h-6 mr-2 animate-spin" /> Loading...
-            </div>
-        );
-    }
     return (
-        <main className="fixed bg-white inset-0 flex flex-col items-center justify-center h-screen w-screen mx-auto text-gray-500 z-50">
-            <div className="max-w-[300px] w-full flex flex-col justify-center items-center p-8 py-16 border border-gray-200 rounded-lg shadow-lg">
-                <RiAdminLine className="w-8 h-8 mb-2" />
-                <h1 className="text-lg font-bold mb-4">Admin Login</h1>
+        <>
+            <div className="flex flex-col items-center gap-2 text-center mb-6">
+                <h1 className="text-2xl font-bold">Login as Admin</h1>
+                <p className="text-balance text-sm text-muted-foreground">
+                    Enter your email below to login to your account
+                </p>
+            </div>
+            <div className="grid gap-6">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
                         <FormField
@@ -107,6 +109,7 @@ export default function Login() {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
+                                    <FormLabel>Email</FormLabel>
                                     <FormControl>
                                         <Input placeholder="Email address" {...field} />
                                     </FormControl>
@@ -119,6 +122,7 @@ export default function Login() {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
+                                    <FormLabel>Password</FormLabel>
                                     <FormControl>
                                         <Input placeholder="Password" type="password" {...field} />
                                     </FormControl>
@@ -129,7 +133,7 @@ export default function Login() {
                         <Button
                             type="submit"
                             disabled={loadingSignIn}
-                            className="flex gap-2 w-full p-6 bg-gray-600 hover:bg-gray-700 cursor-pointer"
+                            className="flex gap-2 w-full p-6 bg-gray-900 hover:bg-gray-800 cursor-pointer"
                         >
                             Login{' '}
                             {loadingSignIn ? (
@@ -141,6 +145,35 @@ export default function Login() {
                     </form>
                 </Form>
             </div>
-        </main>
+        </>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <div className="fixed inset-0 bg-white w-screen h-screen grid min-h-svh lg:grid-cols-2 z-50">
+            <div className="flex flex-col gap-4 p-6 md:p-10">
+                <div className="flex justify-center gap-2 md:justify-start">
+                    <a href="#" className="flex items-center gap-2 font-medium">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                            <GalleryVerticalEnd className="size-4" />
+                        </div>
+                        Acme Inc.
+                    </a>
+                </div>
+                <div className="flex flex-1 items-center justify-center">
+                    <div className="w-full max-w-xs">
+                        <LoginForm />
+                    </div>
+                </div>
+            </div>
+            <div className="relative hidden bg-muted lg:block">
+                <img
+                    src="https://images.unsplash.com/photo-1740422699287-d8bdbbaec629?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Image"
+                    className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                />
+            </div>
+        </div>
     );
 }

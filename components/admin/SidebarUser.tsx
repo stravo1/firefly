@@ -16,14 +16,11 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from '@/components/ui/sidebar';
-import {
-    LuBadgeCheck,
-    LuBell,
-    LuChevronsUpDown,
-    LuCreditCard,
-    LuLogOut,
-    LuSparkles,
-} from 'react-icons/lu';
+import { firebaseAppAsAdmin } from '@/config';
+import { getAuth, signOut } from 'firebase/auth';
+import { LuBadgeCheck, LuBell, LuChevronsUpDown, LuLogOut } from 'react-icons/lu';
+
+const auth = getAuth(firebaseAppAsAdmin);
 
 export function SidebarUser({
     user,
@@ -77,19 +74,8 @@ export function SidebarUser({
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
-                                <LuSparkles />
-                                Upgrade to Pro
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
                                 <LuBadgeCheck />
                                 Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <LuCreditCard />
-                                Billing
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <LuBell />
@@ -97,7 +83,11 @@ export function SidebarUser({
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                signOut(auth);
+                            }}
+                        >
                             <LuLogOut />
                             Log out
                         </DropdownMenuItem>

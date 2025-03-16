@@ -1,15 +1,5 @@
 'use client';
-import {
-    LuCalendar,
-    LuGalleryVerticalEnd,
-    LuHouse,
-    LuInbox,
-    LuSearch,
-    LuSettings,
-    LuShieldCheck,
-    LuSparkle,
-    LuSparkles,
-} from 'react-icons/lu';
+import { LuCalendar, LuHouse, LuInbox, LuSearch, LuSettings, LuSparkles } from 'react-icons/lu';
 
 import {
     Sidebar,
@@ -17,7 +7,6 @@ import {
     SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
@@ -68,12 +57,12 @@ export function AdminSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <a href="#">
-                                <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
+                                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-gray-300">
                                     <LuSparkles className="size-4" />
                                 </div>
                                 <div className="flex flex-col gap-0.5 leading-none">
-                                    <span className="font-semibold">Admin Dashboard</span>
-                                    <span className="">v1.0.0</span>
+                                    <span className="font-semibold">Firefly Dashboard</span>
+                                    <span className="text-xs">v1.0.0</span>
                                 </div>
                             </a>
                         </SidebarMenuButton>
