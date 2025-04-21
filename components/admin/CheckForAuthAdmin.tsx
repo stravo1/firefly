@@ -1,21 +1,28 @@
 'use client';
 import { firebaseAppAsAdmin } from '@/config';
 import { adminUser } from '@/states/adminStates';
+import { authApp } from '@/states/firebaseStates';
 import { connectAuthEmulator, getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { LuLoader } from 'react-icons/lu';
-import { useSetRecoilState } from 'recoil';
 import { toast } from 'sonner';
 
-const auth = getAuth(firebaseAppAsAdmin);
 // connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 
 export default function CheckForAuthAdmin({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
-    const setAdminUser = useSetRecoilState(adminUser);
+    const setAdminUser = useSetAtom(adminUser);
+    const [auth, setAuth] = useAtom(authApp);
+    if (!auth) {
+        setAuth(getAuth(firebaseAppAsAdmin));
+    }
     useEffect(() => {
+        if (!auth) {
+            return;
+        }
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 router.push('/admin/login');

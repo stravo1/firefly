@@ -2,10 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import '../globals.css';
-import RecoilContextProvider from '@/utils/recoilContextProvider';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
-// import { AppSidebar } from "@/components/app-sidebar"
 
 const inter = Inter({
     variable: '--font-inter',
@@ -28,7 +26,12 @@ export default function AdminLayout({
                 <body className={`${inter.variable} antialiased`}>
                     <AdminSidebar />
                     <main className="w-full h-screen flex flex-col">
-                        <RecoilContextProvider>{children}</RecoilContextProvider>
+                        <div className="flex flex-col items-center h-full w-full mx-auto bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+                            <div className="flex w-full justify-between items-center">
+                                <SidebarTrigger className="m-4 cursor-pointer" />
+                            </div>
+                            {children}
+                        </div>
                         <Toaster />
                     </main>
                 </body>

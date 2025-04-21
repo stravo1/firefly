@@ -1,12 +1,6 @@
 import { User } from 'firebase/auth';
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
-export const adminUser = atom<User | null>({
-    key: 'adminUser',
-    default: null,
-});
+export const adminUser = atom<User | null>(null);
 
-export const isLoggedIn = atom({
-    key: 'isLoggedIn',
-    default: false,
-});
+export const isLoggedIn = atom(false);
