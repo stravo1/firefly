@@ -1,6 +1,8 @@
 {
   "rules": {
-    ".read": "now < 1744655400000",  // 2025-4-15
-    ".write": "now < 1744655400000",  // 2025-4-15
+    "products": {
+      ".read": "auth != null",
+      ".write": "auth != null && auth.token.admin === true"
+    }
   }
 }
