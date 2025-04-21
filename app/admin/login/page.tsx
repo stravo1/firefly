@@ -152,7 +152,7 @@ function LoginForm() {
 export default function LoginPage() {
     return (
         <div className="fixed inset-0 bg-white w-screen h-screen grid min-h-svh lg:grid-cols-2 z-50">
-            <div className="flex flex-col gap-4 p-6 md:p-10">
+            <div className="flex flex-col gap-4 p-6 md:p-10 bg-white sm:[background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] lg:[background:none]">
                 <div className="flex justify-center gap-2 md:justify-start">
                     <a href="#" className="flex items-center gap-2 font-medium">
                         <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
