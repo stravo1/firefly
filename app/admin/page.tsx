@@ -14,7 +14,6 @@ export default function AdminRoot() {
         <CheckForAuthAdmin>
             <div className="flex flex-col items-center h-full w-full mx-auto bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
                 <section className="flex items-center justify-between h-fit w-full mx-auto">
-                    <SidebarTrigger className="m-4 cursor-pointer" />
                 </section>
                 <h1>Admin Dashboard</h1>
             </div>
