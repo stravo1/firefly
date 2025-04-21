@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const auth = getAuth(firebaseAppAsAdmin);
-connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+// connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 
 export default function CheckForAuth({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter();

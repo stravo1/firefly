@@ -1,5 +1,5 @@
 'use client';
-import { LuCalendar, LuHouse, LuInbox, LuSearch, LuSettings, LuSparkles } from 'react-icons/lu';
+import { LuBadgePercent, LuLayers, LuPackage, LuSettings, LuSparkles, LuTag } from 'react-icons/lu';
 
 import {
     Sidebar,
@@ -12,7 +12,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { SidebarUser } from './SidebarUser';
+import { SidebarUser } from './SidebarAccount';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { LucideHome } from 'lucide-react';
 
 // Menu items.
 const user = {
@@ -24,32 +27,38 @@ const user = {
 const items = [
     {
         title: 'Home',
-        url: '#',
-        icon: LuHouse,
+        url: '',
+        icon: LucideHome,
     },
     {
-        title: 'Inbox',
-        url: '#',
-        icon: LuInbox,
+        title: 'Products',
+        url: 'products',
+        icon: LuTag,
     },
     {
-        title: 'Calendar',
-        url: '#',
-        icon: LuCalendar,
+        title: 'Categories',
+        url: 'categories',
+        icon: LuLayers,
     },
     {
-        title: 'Search',
-        url: '#',
-        icon: LuSearch,
+        title: 'Orders',
+        url: 'orders',
+        icon: LuPackage,
+    },
+    {
+        title: 'Discounts',
+        url: 'discounts',
+        icon: LuBadgePercent,
     },
     {
         title: 'Settings',
-        url: '#',
+        url: 'settings',
         icon: LuSettings,
     },
 ];
 
 export function AdminSidebar() {
+  const pathname = usePathname()
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -73,13 +82,13 @@ export function AdminSidebar() {
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
+                            {items.map((item, index) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                    <SidebarMenuButton asChild isActive={index ? pathname.endsWith(item.url) : pathname === '/admin'}>
+                                        <Link href={`/admin/${item.url}`}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
